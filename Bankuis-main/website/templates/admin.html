@@ -1,0 +1,258 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+
+<h1 align="center">Welcome {{user.first_name}}</h1>
+
+
+<form method="POST">
+  <div class="form-group">
+    <label for="LockUser">Lock User</label>
+    <input
+      type="text"
+      class="form-control"
+      id="LockUser"
+      name="LockUser"
+      placeholder="LockUser"
+      min="1"
+      maxlength="8"
+    />
+     <button type="submit" name="LockUser" class="btn btn-primary">Lock User</button>
+  </div>
+  </form>
+
+<form method="POST">
+   <div class="form-group">
+    <label for="ResetUser">Reset/UnLock User</label>
+    <input
+      type="text"
+      class="form-control"
+      id="ResetUser"
+      name="ResetUser"
+      placeholder="ResetUser"
+      min="1"
+      maxlength="8"
+    />
+     <button type="submit" name="ResetUser" class="btn btn-primary">Reset/UnLock User</button>
+  </div>
+</form>
+
+  <form method="POST">
+  <div class="form-group">
+    <label for="DeleteUser">Delete User</label>
+    <input
+      type="text"
+      class="form-control"
+      id="DeleteUser"
+      name="DeleteUser"
+      placeholder="DeleteUser"
+      min="1"
+      maxlength="8"
+    />
+     <button type="submit" name="DeleteUser" class="btn btn-primary">Delete User</button>
+  </div>
+  </form>
+
+
+  <form method="POST">
+  <div class="form-group">
+    <label for="UserID">User to change password</label>
+    <input
+      type="text"
+      class="form-control"
+      id="UserID"
+      name="UserID"
+      placeholder="User to change password"
+      min="1"
+      maxlength="8"
+    />
+    <br/>
+      <p> </p>
+      <p>To make the password as safe as possible it must be at least 8 characters long, contain at least 2 numbers, at least one capital and lowercase letter and at least one special character. Don't include email or username as passwords.</p>
+      <p> </p>
+    <label for="new_password">New Password</label>
+    <input
+      type="text"
+      class="form-control"
+      id="new_password"
+      name="new_password"
+      placeholder="New Password"
+      min="1"
+      maxlength="20"
+    />
+      <button type="submit" name="NewPassword" class="btn btn-primary">Change Password</button>
+  </div>
+
+</form>
+<form method="POST">
+
+</form>
+<br/>
+<!.........................Skille mellom de to formene..dette skulle fungere med litt modding..............................................>
+<div class="btn-group" role="group" aria-label="Basic example">
+
+  <form method='POST'>
+      <div class="form-group ">
+  <br/>
+          <br/>
+          <br/>
+          <br/>
+  <br/>
+  </div>
+  <button type="submit" name="CancelButton" class="btn btn-primary">Cancel</button>
+    {%if verdi == 0%}
+    {%endif%}
+  </form>
+
+
+
+
+  <form method='POST'>
+      <div class="form-group">
+  <br/>
+    <label for="FilterLastEntry1">Filter user database by last entry number   |</label><br/>
+          <h8>The number of rows is {{user_number}}</h8>
+    <input
+      type="text"
+      class="form-control"
+      id="FilterLastEntry1"
+      name="FilterLastEntry1"
+      placeholder="Filter Entry"
+      min="1"
+      maxlength="8"
+    />
+  </div>
+
+  <button type="submit" name="UserButton" class="btn btn-primary">User-Database</button>
+    <br/> <br/><br/><br/><br/><br/><br/>
+
+    {%if verdi== 1%}
+       <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">UserID</th>
+                <th scope="col">UserEmail</th>
+                <th scope="col">Role</th>
+                 <th scope="col">FirstName</th>
+                <th scope="col">FailedLogin</th>
+                <th scope="col">UserOnline</th>
+
+          </tr>
+            </thead>
+
+
+    {% for user in get_user %}
+           <tr>
+            <th scope="row">{{user.id}}</th>
+            <th scope="row">{{user.email}} </th>
+            <th scope="row">{{user.role}}</th>
+               <th scope="row">{{user.first_name}}</th>
+            <th scope="row">{{user.failed_login}} </th>
+            <th scope="row">{{user.logged_on}}</th>
+        </tr>
+
+    {%endfor %}
+       </table>
+    {%endif%}
+  </form>
+
+
+
+
+
+  <form method="POST">
+      <div class="form-group">
+  <br/>
+    <label for="FilterLastEntry2">Filter account database by last entry number   |</label><br/>
+          <h8>The number of rows is {{account_number}}</h8>
+    <input
+      type="text"
+      class="form-control"
+      id="FilterLastEntry2"
+      name="FilterLastEntry2"
+      placeholder="Filter Entry"
+      min="1"
+      maxlength="8"
+    />
+  </div>
+
+  <button type="submit" name="ButtonAccount" class="btn btn-primary" text-white>Account-Database</button>
+    <br/> <br/><br/> <br/>
+
+ {%if verdi == 2%}<br/>
+      <table class="table table-bordered">
+            <thead>
+            <tr>
+
+                <th scope="col">UserID</th>
+                <th scope="col">Account#</th>
+                <th scope="col">Value £</th>
+          </tr>
+            </thead>
+
+    {% for user in get_note %}
+     <tr>
+
+            <th scope="row">{{user.user_id}}</th>
+            <th scope="row">{{user.id}} </th>
+            <th scope="row">{{user.data}}</th>
+        </tr>
+
+
+    {%endfor %}
+      </table>
+    {%endif%}
+  </form>
+
+
+
+
+  <form method="POST">
+      <div class="form-group">
+  <br/>
+    <label for="FilterLastEntry3">Filter logg database by last entry number     </label><br/>
+          <h8>The number of rows is {{logg_number}}</h8>
+    <input
+      type="text"
+      class="form-control"
+      id="FilterLastEntry3"
+      name="FilterLastEntry3"
+      placeholder="Filter Entry"
+      min="1"
+      maxlength="8"
+    />
+  </div>
+  <button type="submit" name="LoggButton" class="btn btn-primary">Logg-Database</button>
+    <br/> <br/><br/> <br/>
+
+    {%if verdi == 3%}
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">Entry#</th>
+                <th scope="col">UserID</th>
+                <th scope="col">Event</th>
+                <th scope="col">Time</th>
+
+          </tr>
+            </thead>
+     {% for user in get_logg %}
+        <tr>
+            <th scope="row">{{user.logg_id}}</th>
+            <th scope="row">{{user.user_id}}</th>
+            <th scope="row">{{user.event}} </th>
+            <th scope="row">{{user.time}}</th>
+        </tr>
+    {%endfor %}
+            </table>
+    {%endif%}
+
+
+  </form>
+<br/>
+</div>
+<!..................................................................................................................>
+
+<br/>
+
+
+{% endblock %}

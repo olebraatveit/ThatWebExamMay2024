@@ -1,0 +1,9 @@
+pip
+virtualenv
+argon2-cffi
+flask
+Flask-SQLAlchemy
+flask-login
+gunicorn
+jinja2
+psycopg2

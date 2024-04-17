@@ -1,0 +1,139 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+<p> </p>
+<center><img src="static/bankuislogo.jpg" style="width: 682px; height: 400px"/></center>
+<p> </p>
+<h1 align="center">Welcome {{user.first_name}}</h1>
+<form method="POST">
+  <h3 align="center">Payments</h3>
+  <div class="form-group">
+    <label for="sender">Sender Account</label>
+    <input
+      type="text"
+      class="form-control"
+      id="sender"
+      name="sender"
+      placeholder="Sender Account"
+      min="1"
+      maxlength="8"
+    />
+  </div>
+  <div class="form-group">
+    <label for="resiver">Receiver Account</label>
+    <input
+      type="text"
+      class="form-control"
+      id="resiver"
+      name="resiver"
+      placeholder="Receiver Account"
+      min="1"
+      maxlength="8"
+    />
+  </div>
+  <div class="form-group">
+    <label for="payment">Payment</label>
+    <input
+      type="text"
+      class="form-control"
+      id="payment"
+      name="payment"
+      placeholder="Confirm payment"
+      min="1"
+      maxlength="8"
+    />
+  </div>
+  <br />
+  <button type="submit" name="PaymentButton" class="btn btn-primary">Send Payment</button>
+</form>
+
+<!.........................Skille mellom de to formene..dette skulle fungere med litt modding..............................................>
+
+<form method="POST">
+<h3 align="center">User Accounts</h3>
+  <br />
+  <div align="center">
+
+    <button type="submit" name="AccountButton" class="btn btn-primary">Add Account</button>
+
+  </div>
+<p> </p>
+<p> </p>
+<p> </p>
+<ul class="list-group list-group-flush" id="notes">
+  <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">Account number</th>
+                <th scope="col">Balance £</th>
+                <th scope="col">Delete Account</th>
+
+          </tr>
+            </thead>
+  {% for note in user.notes %}
+   <tr>
+            <th scope="row">{{note.id}}</th>
+            <th scope="row">{{note.data}}</th>
+     
+   <th scope="row">
+            <a role="button" class="btn btn-primary" onClick="deleteNote({{ note.id }})"><span>Delete</span></a>
+        </th>
+
+        </tr>
+  {% endfor %}
+</table>
+ 
+</ul>
+</form>
+<p> </p>
+<p> </p>
+
+<div class="btn-group" role="group" aria-label="Basic example">
+
+  <form method='POST'>
+
+      <div class="form-group ">
+          <h4 for="FilterLastEntry4"> User activity log  |   {{user.first_name}}'s log has {{logg_number}} entries </h4>
+
+  </div>
+  <button type="submit" name="CancelButton" class="btn btn-primary">Cancel</button>
+    {%if verdi == 0%}
+    {%endif%}
+
+      <div class="form-group">
+  <br/>
+
+  </div>
+  <button type="submit" name="UserLogg" class="btn btn-primary">Log-Database</button>
+    <br/> <br/><br/> <br/>
+
+    {%if verdi == 4%}
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+
+                <th scope="col">Event</th>
+                <th scope="col">Time</th>
+
+          </tr>
+            </thead>
+     {% for user in get_logg %}
+        <tr>
+            <th scope="row">{{user.event}} </th>
+            <th scope="row">{{user.time}}</th>
+        </tr>
+    {%endfor %}
+            </table>
+    {%endif%}
+
+
+  </form>
+<br/>
+</div>
+
+
+
+
+
+<p> </p>
+<p> </p>
+{% endblock %}
